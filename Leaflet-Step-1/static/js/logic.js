@@ -73,3 +73,17 @@ d3.json(geoData).then(function (data) {
                 return 3;
         }
     };
+
+   // Creating a function to determine the the style of the marker as the "magnitude" is higher or lower
+
+   function stylemag(feature) {
+    return {
+        opacity: 1,
+        fillColor: choosemagColor(feature.properties.mag),
+        color: "Black",
+        radius: choosemagSize(feature.properties.mag),
+        stroke: true,
+        weight: 0.75
+
+    };
+};
