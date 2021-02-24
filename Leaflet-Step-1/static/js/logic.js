@@ -27,6 +27,49 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: API_KEY
 }).addTo(myMap);
 
-/ Storing API query variable
+//  Storing API query variable
 // Storing the geojson data url for all earthquakes from the past 7 days
 var geoData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
+// Grabbing the geoData with d3
+d3.json(geoData).then(function (data) {
+    // console.log(geoData);
+
+
+    // Your data markers should reflect the magnitude of the earthquake in their size and color. 
+    // Earthquakes with higher magnitudes should appear larger and darker in color.
+
+    // Creating a function that will determine color of the marker as the "magnitude" is high or lower
+    function choosemagColor(magnitude) {
+        switch (true) {
+            case magnitude > 5:
+                return "rgb(234, 44, 44)";
+            case magnitude > 4:
+                return "rgb(234, 130, 44)";
+            case magnitude > 3:
+                return "rgb(238, 156, 0)";
+            case magnitude > 2:
+                return "rgb(238, 204, 0)";
+            case magnitude > 1:
+                return "rgb(212, 238, 0)";
+            default:
+                return "rgb(152, 238, 0)";
+        }
+    };
+    // Creating a function to determine the size of the marker as the "magnitude" is higher or lower
+    function choosemagSize(magnitude) {
+        switch (true) {
+            case magnitude > 5:
+                return 30;
+            case magnitude > 4:
+                return 24;
+            case magnitude > 3:
+                return 18;
+            case magnitude > 2:
+                return 12;
+            case magnitude > 1:
+                return 6;
+            default:
+                return 3;
+        }
+    };
