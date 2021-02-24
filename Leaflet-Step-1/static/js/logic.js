@@ -105,3 +105,27 @@ d3.json(geoData).then(function (data) {
         );
     }
 }).addTo(myMap);
+
+    // Setting up the legend for the map
+    var legend = L.control({
+        position: "bottomright"
+    });
+    legend.onAdd = function () {
+
+        var div = L.DomUtil.create("div", "info legend");
+        var magLevels = [0, 1, 2, 3, 4, 5];
+
+        // Looping through the magnitude to generate a label 
+        for (var i = 0; i < magLevels.length; i++) {
+            div.innerHTML +=
+                '<i style="background: ' + choosemagColor(magLevels[i] + 1) + '"></i> ' +
+                magLevels[i] + (magLevels[i + 1] ? '&ndash;' + magLevels[i + 1] + '<br>' : '+');
+        }
+        console.log(div);
+        return div;
+
+    };
+
+    // Adding legend to the map
+    legend.addTo(myMap);
+});
