@@ -87,3 +87,21 @@ d3.json(geoData).then(function (data) {
 
     };
 };
+
+   // Creating a layer of GeoJSON data to contain the array of the created features
+   L.geoJSON(data, {
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng);
+    },
+    // Adding marker style created
+    style: stylemag,
+
+    // Binding a Popup for the location, date, time, and the magnitude of the earthquake
+    onEachFeature: function (feature, layer) {
+        layer.bindPopup(
+            "<h4>Location: " + feature.properties.place + "</h4><hr><p>Date/Time: " +
+            new Date(feature.properties.time) + "</p><hr><p>Magnitude: " +
+            feature.properties.mag + "</p>"
+        );
+    }
+}).addTo(myMap);
