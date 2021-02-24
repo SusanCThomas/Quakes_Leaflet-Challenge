@@ -26,3 +26,7 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     id: "mapbox/light-v10",
     accessToken: API_KEY
 }).addTo(myMap);
+
+/ Storing API query variable
+// Storing the geojson data url for all earthquakes from the past 7 days
+var geoData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
